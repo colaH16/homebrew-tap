@@ -23,9 +23,10 @@ cask "xld" do
 
   # Upstream build is not notarized (homebrew/cask disabled it with :fails_gatekeeper_check).
   # Strip quarantine so Gatekeeper does not block the first launch.
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/XLD.app"]
+  postflight_steps do
+    run "/usr/bin/xattr",
+        args:         ["-dr", "com.apple.quarantine", "{{appdir}}/XLD.app"],
+        must_succeed: false
   end
 
   zap trash: [
