@@ -10,6 +10,7 @@ brew tap colah16/tap
 
 | Cask | Description |
 |---|---|
+| `tile-launcher` | [Tile Launcher](https://github.com/colaH16/tile-launcher) — Option-key tile overlay launcher. Notarized release from GitHub. Apple Silicon, macOS 26+. |
 | `xld` | X Lossless Decoder. Kept here because `homebrew/cask` disabled it on 2026-09-01 (`:fails_gatekeeper_check`). |
 
 ### xld
