@@ -1,6 +1,6 @@
 cask "lowtide" do
-  version "1.0.0"
-  sha256 "056567edf1a810953081d4a416f0c49f458244eb463e9a5be5288828a3a7a89c"
+  version "1.0.1"
+  sha256 "3d1580ab901dcac1c88738bce1d66bb5a75bbdb8d94f1612ca69a5616a4424c5"
 
   url "https://github.com/colaH16/LowTide/releases/download/v#{version}/LowTide-#{version}-arm64.zip"
   name "LowTide"
