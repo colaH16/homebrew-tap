@@ -1,0 +1,37 @@
+# colaH16/homebrew-tap
+
+Personal Homebrew tap.
+
+```sh
+brew tap colah16/tap
+```
+
+## Casks
+
+| Cask | Description |
+|---|---|
+| `xld` | X Lossless Decoder. Kept here because `homebrew/cask` disabled it on 2026-09-01 (`:fails_gatekeeper_check`). |
+
+### xld
+
+The cask downloads the **official, unmodified** upstream DMG from SourceForge (pinned by `sha256`).
+Nothing is rebuilt or redistributed here.
+
+The upstream app is not notarized, so a `postflight` step removes the
+`com.apple.quarantine` attribute after install. Gatekeeper's malware scan is
+skipped for this app — install it only if you trust the upstream build.
+
+```sh
+brew install --cask colah16/tap/xld
+# or into a custom folder
+brew install --cask --appdir="$HOME/Applications/Media Pro" colah16/tap/xld
+```
+
+`auto_updates true`: updates are handled by XLD's built-in Sparkle updater,
+so `brew upgrade` skips it unless `--greedy` is used.
+
+## License
+
+Cask definitions are derived from [Homebrew/homebrew-cask](https://github.com/Homebrew/homebrew-cask)
+and distributed under the BSD 2-Clause License. See [LICENSE](LICENSE).
+The applications installed by these casks are subject to their own licenses.
