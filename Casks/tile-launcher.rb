@@ -1,6 +1,6 @@
 cask "tile-launcher" do
-  version "2.1.7"
-  sha256 "36679350b1bac3fd6ad3689e829fecbe0461ae9a556ba142838a2c1509947bad"
+  version "2.1.8"
+  sha256 "eee0c8ac41bf0e84342c0343bea65b3b1b273335d431c247226350f3c3f16f25"
 
   url "https://github.com/colaH16/tile-launcher/releases/download/v#{version}/Tile-Launcher-#{version}-arm64.zip"
   name "Tile Launcher"
