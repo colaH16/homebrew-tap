@@ -1,3 +1,21 @@
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 9edf8d7..82a69e5 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -1,6 +1,12 @@
+ # Tile Launcher 버전 이력
+ 
+-기준일: 2026-10-27 (Asia/Seoul). 최신 정식 공개와 이 Mac 설치는 공증 **2.1.8(74)** 이다. 기존 릴리스와 백업은 보존한다.
++기준일: 2026-10-28 (Asia/Seoul). 최신 정식 공개는 공증 **2.1.8(74)** 이며, **2.1.9(75)** 개발판을 Homebrew로 설치했으며, 모든 비Option 호출 고정을 보완한 **2.1.9(76)** 을 준비 중이다. 직전 로컬 시험본의 2.2.0 표기는 사용자 지시로 패치 2.1.9로 정정한다. 기존 릴리스와 백업은 보존한다.
++
++## 2.1.9 · 메뉴 막대 호출·고정 상태 보완 (개발 시험본)
++
++- 메뉴 막대 좌클릭·메뉴의 열기·Finder/Dock 앱 재실행 등 모든 수동 호출은 기존 오버레이를 고정 상태로 바로 열어 닫기 버튼을 표시한다. 이미 열린 창은 재사용해 고정하고 앞으로 가져온다.
++- 우클릭은 기존 열기·설정·접근성 권한 요청·종료 메뉴를 표시한다. 메뉴를 닫은 다음에도 좌클릭은 고정 오버레이를 연다.
++- 기존 Option 길게 누르기/빠른 재열기는 고정하지 않고 해제하면 닫힌다. 75 실기에서 보고된 메뉴 열기·앱 재실행 비고정을 76에서 공통 호출 경로로 보완한다. 새 공증·정식 GitHub 공개·정식 cask 갱신은 사용자 실기 확인 전 진행하지 않는다.
+ 
+ ## 2.1.8 · 초기 최근 창 수집·호출 방식 구분·앱 탐색 개선
+ 
 diff --git a/Sources/TileLauncher/PreviewFixtures.swift b/Sources/TileLauncher/PreviewFixtures.swift
 index 1d38efd..cd0f9a2 100644
 --- a/Sources/TileLauncher/PreviewFixtures.swift
@@ -21,7 +39,7 @@ index 1d38efd..cd0f9a2 100644
          try delegate.verifyOptionHoldDismissalForPreview()
          try ApplicationLaunchMonitor.verifyForPreview()
 diff --git a/Sources/TileLauncher/main.swift b/Sources/TileLauncher/main.swift
-index 95096ee..1c43bd8 100644
+index 95096ee..b617e94 100644
 --- a/Sources/TileLauncher/main.swift
 +++ b/Sources/TileLauncher/main.swift
 @@ -47,6 +47,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
@@ -44,7 +62,7 @@ index 95096ee..1c43bd8 100644
  
          tracker.onFocusConfirmed = { [weak self] window in
              self?.launches.confirmWindowReady(pid: window.pid)
-@@ -326,6 +330,34 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
+@@ -326,6 +330,28 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
      @objc func openFromMenu() {
          show(held: false)
      }
@@ -67,24 +85,48 @@ index 95096ee..1c43bd8 100644
 +            let bottom = sender.isFlipped ? sender.bounds.maxY : sender.bounds.minY
 +            statusMenu.popUp(positioning: nil, at: NSPoint(x: sender.bounds.minX, y: bottom), in: sender)
 +        } else {
-+            openPinnedFromStatusItem()
++            show(held: false)
 +        }
-+    }
-+    private func openPinnedFromStatusItem() {
-+        // Capture the source context and finish present/reset before pinning.
-+        // show reuses an already visible panel; pinning also brings it forward.
-+        show(held: false)
-+        pinOverlay()
 +    }
      @objc private func reopenNotification(_ notification: Notification) {
          reopenExistingInterface(settings: notification.userInfo?["settings"] as? Bool == true, checkForUpdate: false)
      }
-@@ -674,6 +706,65 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
+@@ -379,9 +405,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
+         prepared?.panel.contentView = nil
+         prepared = nil
+     }
++    /// `held` is how the overlay was invoked, not the current Option key state.
++    /// Only the Option hold (and its quick reopen) closes on release; every other
++    /// invocation — status item, menu, --show, Finder/Dock or instance reopen —
++    /// opens pinned, and pins/raises an overlay that is already visible.
+     private func show(held: Bool, restoring previousLayout: PanelLayout? = nil) {
+         if MainActor.assumeIsolated({ settingsSync?.presentAccountChangeIfNeeded() == true }) { return }
+-        guard panel?.isVisible != true else { return }
++        guard panel?.isVisible != true else {
++            if !held { pinOverlay() }
++            return
++        }
+         optionReopen.cancel()
+         checkPermission()
+         updateApps()
+@@ -393,6 +426,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
+             overlay = built
+         }
+         present(overlay, held: held)
++        // After present's reset, and after the source context was captured above,
++        // so activating the launcher cannot replace it.
++        if !held { pinOverlay() }
+     }
+     /// The prepared overlay if it still matches the cursor's screen, profile,
+     /// permission and size; it is moved to the current cursor position.
+@@ -674,6 +710,85 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
          presentation.clearExecution()
      }
      #if TILE_LAUNCHER_DIAGNOSTICS
 +    /// Synthetic button/menu and an offscreen panel; no status item, real menu
-+    /// tracking, keyboard monitor or application launch is installed.
++    /// tracking, keyboard monitor or application launch is installed. Covers the
++    /// central show(held:) decision on an already visible panel; building a fresh
++    /// panel needs the real screen/AX/Dock path and is left to the app itself.
 +    func verifyStatusItemPinningForPreview() throws {
 +        final class MenuProbe: NSMenu {
 +            var presentations = 0
@@ -121,6 +163,10 @@ index 95096ee..1c43bd8 100644
 +            handleStatusItemClick(.rightMouseUp, sender: button)
 +            try check(!presentation.isPinned && !button.isHighlighted,
 +                      "Right-click changed pin state or left button highlighted")
++            show(held: true)
++            try check(panel === window && window.isVisible && !presentation.isPinned
++                      && heldPresentation == held && presentation.dismisses(for: .release),
++                      "Option hold invocation pinned or replaced the visible overlay")
 +            handleStatusItemClick(.leftMouseUp, sender: button)
 +            try check(panel === window && window.isVisible && presentation.isPinned
 +                      && pendingAction == nil && presentation.selection == nil && !staleSelectionRan
@@ -131,6 +177,20 @@ index 95096ee..1c43bd8 100644
 +            handleStatusItemClick(.leftMouseUp, sender: button)
 +            try check(panel === window && window.isVisible && presentation.isPinned,
 +                      "Repeated left-click toggled the pinned overlay closed")
++            redisplayProfile()
++            try check(panel === window && window.isVisible && presentation.isPinned,
++                      "Profile redisplay released the pin")
++            // Other manual entries share the same central show(held: false).
++            // Instance/Finder reopen also re-arms global monitors, so it is wired
++            // by reading reopenExistingInterface rather than invoked here.
++            presentation.reset()
++            openFromMenu()
++            try check(panel === window && window.isVisible && presentation.isPinned,
++                      "Menu Open did not pin the visible overlay")
++            presentation.reset()
++            show(held: false)
++            try check(panel === window && window.isVisible && presentation.isPinned
++                      && heldPresentation == held, "Manual show did not pin the visible overlay")
 +        }
 +        try check(menu.presentations == 2 && button.menu == nil,
 +                  "Left-click opened a menu or right-click left an attached menu")
@@ -140,13 +200,13 @@ index 95096ee..1c43bd8 100644
 +                  "Control-click did not open only the menu")
 +        hide()
 +        try check(!window.isVisible && !presentation.isPinned, "Explicit close did not dismiss/reset the overlay")
-+        print("Status item: right/left/right/left and control-click routing, existing manual/held panel pinning, reuse, queued selection cancellation and explicit close passed without Option input.")
++        print("Status item/manual show: right/left and control-click routing; status, menu Open and manual show pin an existing manual/held panel, Option hold invocation stays unpinned, profile redisplay keeps the pin; reuse, queued selection cancellation and explicit close passed without Option input.")
 +    }
      /// Isolated native verification: synthetic callbacks, no windows or app launch.
      func verifyClickExecutionForPreview() throws {
          hold.canTriggerHold = { false }
 diff --git a/release/config.json b/release/config.json
-index d0d6b5f..06ec86b 100644
+index d0d6b5f..a5d8e9e 100644
 --- a/release/config.json
 +++ b/release/config.json
 @@ -1,6 +1,6 @@
@@ -154,7 +214,7 @@ index d0d6b5f..06ec86b 100644
 -  "version": "2.1.8",
 -  "build": "74",
 +  "version": "2.1.9",
-+  "build": "75",
++  "build": "76",
    "architecture": "arm64",
    "minimum_macos": "26.0",
    "prerelease": false
@@ -172,7 +232,7 @@ index a88b2f9..0ead5b3 100644
    ]
  }
 diff --git a/release/notes.md b/release/notes.md
-index 1eff463..28ea162 100644
+index 1eff463..f74d329 100644
 --- a/release/notes.md
 +++ b/release/notes.md
 @@ -1,21 +1,13 @@
@@ -186,9 +246,9 @@ index 1eff463..28ea162 100644
 +### 2.1.9 — 메뉴 막대 좌·우클릭 분리
  
 -#### 오버레이 닫힘 동작
-+- 메뉴 막대 아이콘을 좌클릭하면 기존 오버레이가 처음부터 고정 상태로 열립니다. 왼쪽 위 닫기 버튼으로 한 번에 닫을 수 있습니다. 이미 열려 있으면 같은 창을 고정하고 앞으로 가져옵니다.
++- 메뉴 막대 좌클릭, 메뉴의 열기, Finder/Dock 앱 재실행 등 Option 호출 이외의 모든 수동 호출은 기존 오버레이가 처음부터 고정 상태로 열립니다. 왼쪽 위 닫기 버튼으로 한 번에 닫을 수 있습니다. 이미 열려 있으면 같은 창을 고정하고 앞으로 가져옵니다.
 +- 우클릭하면 기존 메뉴(열기, 설정, 접근성 권한 요청, 종료)를 표시합니다. 메뉴를 닫은 뒤 좌클릭해도 고정 오버레이가 열립니다.
-+- 기존 Option 길게 누르기와 우클릭 메뉴의 열기 동작은 그대로 유지합니다.
++- 기존 Option 길게 누르기와 빠른 재열기는 고정하지 않으며, 고정 버튼을 따로 누르지 않았다면 Option을 놓으면 닫힙니다.
  
 -- 메뉴 막대에서 연 오버레이에서 Option을 누른 채 최근 창을 선택했을 때, 고정하지 않은 오버레이가 남던 경계 동작을 수정합니다.
 -- Option으로 연 오버레이는 창 선택·데스크탑 전환 중 계속 유지되고, 고정하지 않았다면 Option을 놓을 때 닫힙니다.

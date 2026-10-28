@@ -1,0 +1,23 @@
+{
+  "version": "2.1.9",
+  "build": "76",
+  "developer_id_signed": true,
+  "notarized": false,
+  "sha256": "3e8ae4c442988f3886ac06b9266aef095eb29b4aea56eb42cef0b3badf378c82",
+  "bundle_sha256": "99df1efde316cc54201c622eaf8f932ca7f3b9b0edac6485aa31f9c5007179da",
+  "source_base": "4138bfa11a572fb0e1a06b1d719a0c1e26b909cc",
+  "source_patch": "source.patch",
+  "local_snapshot_revision": "4be7703b467a57971fe0474b43ae046fba216af3",
+  "changes": [
+    "All non-Option overlay invocations open pinned",
+    "Menu Open and Finder/Dock/instance reopen use the common manual path",
+    "Existing Option-held overlay is reused and pinned when manually invoked",
+    "Option hold and quick reopen retain release-to-close behavior"
+  ],
+  "checks": {
+    "xctest": 316,
+    "python": 30,
+    "native_png": 111
+  },
+  "user_ui_validation": "pending"
+}
