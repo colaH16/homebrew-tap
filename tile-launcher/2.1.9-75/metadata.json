@@ -1,0 +1,17 @@
+{
+  "version": "2.1.9",
+  "build": "75",
+  "developer_id_signed": true,
+  "notarized": false,
+  "sha256": "bc4664c8c249be635ce927fb5e06396dafebcd8f992de3f291bf8bb04a468141",
+  "bundle_sha256": "4fe6c55803e89b715178c31f3d687f0a6229f819f45f74c43de1dc7d7c7c92f6",
+  "source_base": "4138bfa11a572fb0e1a06b1d719a0c1e26b909cc",
+  "source_patch": "source.patch",
+  "local_snapshot_revision": "f49c8ee2cf56abe210a3672fc8b6ed8cb728ca13",
+  "checks": {
+    "xctest": 316,
+    "python": 30,
+    "native_png": 111
+  },
+  "user_ui_validation": "pending"
+}
