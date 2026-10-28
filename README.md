@@ -17,7 +17,7 @@ brew tap colah16/tap
 
 ### tile-launcher@dev
 
-Developer ID signed test builds, currently 2.1.9 (75), distributed from this tap's
+Developer ID signed test builds, currently 2.1.9 (76), distributed from this tap's
 `dev-builds` branch. These builds are not notarized or stable releases.
 The stable `tile-launcher` cask and upstream GitHub releases are unchanged.
 
