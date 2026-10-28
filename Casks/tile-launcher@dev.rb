@@ -11,10 +11,9 @@ cask "tile-launcher@dev" do
     skip "Development builds are updated explicitly in this tap"
   end
 
+  conflicts_with cask: "tile-launcher"
   depends_on arch: :arm64
   depends_on macos: :tahoe
-
-  conflicts_with cask: "tile-launcher"
 
   app "Tile Launcher.app"
 
