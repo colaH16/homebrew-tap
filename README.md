@@ -12,13 +12,13 @@ brew tap colah16/tap
 |---|---|
 | `lowtide` | [LowTide](https://github.com/colaH16/LowTide) — Quits chosen apps (Google Drive, OneDrive, …) on Low Data Mode, hotspots or battery. Notarized release from GitHub. Apple Silicon, macOS 13+. |
 | `tile-launcher` | [Tile Launcher](https://github.com/colaH16/tile-launcher) — Option-key tile overlay launcher. Notarized release from GitHub. Apple Silicon, macOS 26+. |
-| `tile-launcher@dev` | Tile Launcher development test channel. Developer ID signed; not notarized. Shares stable settings. |
+| `tile-launcher@dev` | Tile Launcher development test channel. Developer ID signed and Apple notarized. Shares stable settings. |
 | `xld` | X Lossless Decoder. Kept here because `homebrew/cask` disabled it on 2026-09-01 (`:fails_gatekeeper_check`). |
 
 ### tile-launcher@dev
 
-Developer ID signed test builds, currently 2.1.9 (76), distributed from this tap's
-`dev-builds` branch. These builds are not notarized or stable releases.
+Developer ID signed and Apple notarized test build 2.1.10 (77), distributed from
+this tap's `dev-builds` branch. This is a development test build; stable remains 2.1.9.
 The stable `tile-launcher` cask and upstream GitHub releases are unchanged.
 
 The two channels share the same app and settings, so only one can be installed.
