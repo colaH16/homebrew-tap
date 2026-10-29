@@ -1,0 +1,17 @@
+{
+  "version": "2.1.10",
+  "build": "77",
+  "source_base": "0e43d86a0f6b1490b369c3aa42a4ef6be8939ca7",
+  "source_revision": "71dad1fa1cef527c2dd1780ebbcbaebf04c28cef",
+  "BuildID": "9dedb43f96533ede5b24c234a3a5bebbfdf2bccd367c22011319cd833e39a6e1",
+  "signing": "notarized",
+  "bundle_sha256": "7ccbb084ecfb75e132ebcc01c475a240f17a28d6bb370887fe6a0c8842b034b5",
+  "assets": {
+    "Tile-Launcher-2.1.10-arm64.zip": "47e1f9c092e3760a5ecf24d9c4a1d6156046c76700bf12a2fb72379ac6c75f30",
+    "release-metadata.json": "1472922c0f016b509200d8ecc8aa21a827a4ae1b6282538aacdd607f763f1617",
+    "SHA256SUMS.txt": "c8dcb3111118bfa01a7f23ca2d32065b0cde5dd40b55061a96346be87e83a4d1"
+  },
+  "channel": "dev",
+  "stable_release": "v2.1.9",
+  "status": "Company Mac user functional test pending; no stable release has been published."
+}

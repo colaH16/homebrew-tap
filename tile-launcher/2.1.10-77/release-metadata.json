@@ -1,0 +1,16 @@
+{
+  "repository": "colaH16/tile-launcher",
+  "config": {
+    "version": "2.1.10",
+    "build": "77",
+    "architecture": "arm64",
+    "minimum_macos": "26.0",
+    "prerelease": false
+  },
+  "source_revision": "71dad1fa1cef527c2dd1780ebbcbaebf04c28cef",
+  "signing": "notarized",
+  "local_only": false,
+  "toolchain": "Xcode 27.2\nBuild version 27B5038j",
+  "archive": "Tile-Launcher-2.1.10-arm64.zip",
+  "archive_sha256": "47e1f9c092e3760a5ecf24d9c4a1d6156046c76700bf12a2fb72379ac6c75f30"
+}
