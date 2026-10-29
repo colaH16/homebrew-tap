@@ -18,8 +18,10 @@ brew tap colah16/tap
 ### tile-launcher@dev
 
 Developer ID signed and Apple notarized test build 2.1.10 (77), distributed from
-this tap's `dev-builds` branch. This is a development test build; stable remains 2.1.9.
-The stable `tile-launcher` cask and upstream GitHub releases are unchanged.
+this tap's `dev-builds` branch. Stable `tile-launcher` also provides the same
+notarized 2.1.10 (77) build from the upstream GitHub release. You can keep
+`tile-launcher@dev` installed when a tested build becomes stable; both channels
+receive the notarized build.
 
 The two channels share the same app and settings, so only one can be installed.
 Switch without `--zap` to preserve settings:
