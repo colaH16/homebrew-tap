@@ -21,9 +21,38 @@ class Uxplay < Formula
   depends_on :macos
 
   def install
-    system "cmake", "-S", ".", "-B", "build", *std_cmake_args
+    # `brew services` runs uxplay as a launchd agent, which macOS blocks from the local
+    # network (TN3179) until the user allows it. An Info.plist embedded in the executable
+    # lets macOS show the Local Network alert and list "uxplay" in System Settings.
+    (buildpath/"Info.plist").write <<~XML
+      <?xml version="1.0" encoding="UTF-8"?>
+      <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+      <plist version="1.0">
+      <dict>
+        <key>CFBundleIdentifier</key>
+        <string>dev.cola16.uxplay</string>
+        <key>CFBundleName</key>
+        <string>uxplay</string>
+        <key>CFBundleShortVersionString</key>
+        <string>#{version}</string>
+        <key>NSLocalNetworkUsageDescription</key>
+        <string>uxplay exchanges AirPlay timing and audio with iPhone and iPad on your local network.</string>
+        <key>NSBonjourServices</key>
+        <array>
+          <string>_airplay._tcp</string>
+          <string>_raop._tcp</string>
+        </array>
+      </dict>
+      </plist>
+    XML
+
+    system "cmake", "-S", ".", "-B", "build",
+                    "-DCMAKE_EXE_LINKER_FLAGS=-Wl,-sectcreate,__TEXT,__info_plist,#{buildpath}/Info.plist",
+                    *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
+    # Re-sign ad hoc so the signature binds the embedded Info.plist and carries its identifier.
+    system "codesign", "--force", "--sign", "-", "--identifier", "dev.cola16.uxplay", bin/"uxplay"
     # Optional Bluetooth LE beacon helper: keep the script next to its non-executable module.
     libexec.install bin/"uxplay-beacon.py", bin/"uxplay_beacon_module_BleuIO.py"
 
@@ -64,6 +93,9 @@ class Uxplay < Formula
         #{etc}/uxplayrc
       The macOS firewall asks once (and again after each upgrade) whether
       uxplay may accept incoming connections: choose Allow.
+      On the first AirPlay connection macOS also asks whether uxplay may access
+      the local network: choose Allow, then reconnect. Without it audio cannot
+      sync (System Settings > Privacy & Security > Local Network > uxplay).
     EOS
   end
 

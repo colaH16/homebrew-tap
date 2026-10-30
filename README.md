@@ -34,8 +34,16 @@ never overwritten by upgrades:
 | `p 7200` | Fixed ports 7200–7202; the built-in receiver holds 5000/7000. |
 | `m 02:…` | Device ID derived from this Mac's hardware UUID, never the built-in receiver's. |
 
-The macOS firewall asks whether `uxplay` may accept incoming connections after
-install and after each upgrade: choose Allow.
+macOS asks twice after install (and again after upgrades); choose Allow both times:
+
+- **Firewall**: may `uxplay` accept incoming connections.
+- **Local Network**, on the first AirPlay connection: `brew services` runs uxplay as a
+  launchd agent, which macOS keeps off the local network until allowed
+  ([TN3179](https://developer.apple.com/documentation/technotes/tn3179-understanding-local-network-privacy)).
+  Without it the AirPlay timing exchange fails (`raop_ntp ... No route to host` in
+  `$(brew --prefix)/var/log/uxplay.log`) and audio drifts out of sync. Reconnect
+  after allowing; the setting lives in System Settings › Privacy & Security › Local Network.
+  The formula embeds an Info.plist in the executable so macOS can ask.
 
 ## Casks
 
