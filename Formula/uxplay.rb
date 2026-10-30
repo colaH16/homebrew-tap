@@ -1,14 +1,21 @@
 class Uxplay < Formula
   desc "AirPlay Unix mirroring and audio server"
-  homepage "https://github.com/FDH2/UxPlay"
-  url "https://github.com/FDH2/UxPlay/archive/refs/tags/v1.73.7.tar.gz"
-  sha256 "65feb8732de666a7161a9e562aa603a7f5fe0ebb890c2a30c5e1a9c85c76309f"
+  # Fork of https://github.com/FDH2/UxPlay with one -async timing fix; see its FORK.md.
+  homepage "https://github.com/colaH16/UxPlay"
+  url "https://github.com/colaH16/UxPlay/archive/refs/tags/v1.73.7-cola.1.tar.gz"
+  version "1.73.7-cola.1"
+  sha256 "18d8d6f0d3b40c69acb7edb22e4924af91a8dd40cbe1e0c66ee07ea0de808a53"
   license "GPL-3.0-or-later"
-  head "https://github.com/FDH2/UxPlay.git", branch: "master"
+  head "https://github.com/colaH16/UxPlay.git", branch: "macos-brew-1.73.7"
 
   livecheck do
     url :stable
-    strategy :github_latest
+    regex(/^v?(\d+(?:\.\d+)+-cola\.\d+)$/i)
+  end
+
+  bottle do
+    root_url "https://github.com/colaH16/UxPlay/releases/download/v1.73.7-cola.1"
+    sha256 arm64_golden_gate: "e5fa188603d929d29fc2a3b6adebf32c1553dd23a55e81fcc662c5cff2544c0e"
   end
 
   depends_on "cmake" => :build
@@ -55,6 +62,12 @@ class Uxplay < Formula
     system "codesign", "--force", "--sign", "-", "--identifier", "dev.cola16.uxplay", bin/"uxplay"
     # Optional Bluetooth LE beacon helper: keep the script next to its non-executable module.
     libexec.install bin/"uxplay-beacon.py", bin/"uxplay_beacon_module_BleuIO.py"
+    # libplist (LGPL-2.1-or-later) and OpenSSL's libcrypto (Apache-2.0) are linked statically:
+    # ship their license texts with the binary (UxPlay's own GPL text is already in doc).
+    (doc/"libplist").mkpath
+    (doc/"openssl").mkpath
+    cp formula_opt_prefix("libplist").glob("COPYING*"), doc/"libplist"
+    cp formula_opt_prefix("openssl@3")/"LICENSE.txt", doc/"openssl"
 
     # Default startup options for `brew services`, kept in etc so upgrades never overwrite edits.
     # Audio-only receiver: no video window, audio synced to the sender's video delay,
@@ -109,6 +122,6 @@ class Uxplay < Formula
   test do
     # Running uxplay at all needs the macOS GUI event loop (gst_macos_main), which the
     # test sandbox blocks, so check the built binary instead of executing it.
-    assert_includes (bin/"uxplay").binread, version.to_s
+    assert_includes (bin/"uxplay").binread, version.to_s[/^[\d.]+/]
   end
 end

@@ -10,7 +10,7 @@ brew tap colah16/tap
 
 | Formula | Description |
 |---|---|
-| `uxplay` | [UxPlay](https://github.com/FDH2/UxPlay) AirPlay server, built from the upstream source. `brew services` runs it as an audio-only receiver next to the built-in macOS AirPlay Receiver. |
+| `uxplay` | [UxPlay](https://github.com/FDH2/UxPlay) AirPlay server from the [colaH16/UxPlay](https://github.com/colaH16/UxPlay) fork. Bottle for Apple Silicon, macOS 27+; builds from source elsewhere. `brew services` runs it as an audio-only receiver next to the built-in macOS AirPlay Receiver. |
 
 ### uxplay
 
@@ -44,6 +44,12 @@ macOS asks twice after install (and again after upgrades); choose Allow both tim
   `$(brew --prefix)/var/log/uxplay.log`) and audio drifts out of sync. Reconnect
   after allowing; the setting lives in System Settings › Privacy & Security › Local Network.
   The formula embeds an Info.plist in the executable so macOS can ask.
+
+Source and bottle: the fork is upstream UxPlay 1.73.7 plus one `-async` fix (a clock
+offset guessed before NTP synced made audio play ahead of the video), described in its
+[FORK.md](https://github.com/colaH16/UxPlay/blob/v1.73.7-cola.1/FORK.md). The bottle and
+the sources of its statically linked libraries (libplist, OpenSSL) are attached to the
+fork's [release](https://github.com/colaH16/UxPlay/releases/tag/v1.73.7-cola.1).
 
 ## Casks
 
@@ -97,4 +103,7 @@ so `brew upgrade` skips it unless `--greedy` is used.
 Cask definitions are derived from [Homebrew/homebrew-cask](https://github.com/Homebrew/homebrew-cask)
 and distributed under the BSD 2-Clause License. See [LICENSE](LICENSE).
 The applications installed by these casks are subject to their own licenses.
-UxPlay is GPL-3.0-or-later; the `uxplay` formula builds the unmodified upstream source.
+The `uxplay` formula is this tap's own (BSD 2-Clause). The software it installs, UxPlay
+and the colaH16 fork's change, is GPL-3.0-or-later; its bottle also contains libplist
+(LGPL-2.1-or-later) and OpenSSL libcrypto (Apache-2.0), whose license texts are installed
+to `share/doc/uxplay/`.
