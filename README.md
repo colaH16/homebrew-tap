@@ -6,6 +6,37 @@ Personal Homebrew tap.
 brew tap colah16/tap
 ```
 
+## Formulae
+
+| Formula | Description |
+|---|---|
+| `uxplay` | [UxPlay](https://github.com/FDH2/UxPlay) AirPlay server, built from the upstream source. `brew services` runs it as an audio-only receiver next to the built-in macOS AirPlay Receiver. |
+
+### uxplay
+
+```sh
+brew install colah16/tap/uxplay
+brew services restart colah16/tap/uxplay
+```
+
+The service shows up on iPhone/iPad as "*Computer Name* 오디오". Pick it as the
+audio output: video stays on the device and sound plays on the Mac, in sync,
+with about 1 s of start delay (classic AirPlay receivers such as shairport-sync
+on macOS take about 2 s).
+
+Options live in `$(brew --prefix)/etc/uxplayrc`, written on first install and
+never overwritten by upgrades:
+
+| Option | Why |
+|---|---|
+| `vs 0` | No video window: audio only. |
+| `async` | Delays audio to match the sender's video delay, so lips stay in sync. |
+| `p 7200` | Fixed ports 7200–7202; the built-in receiver holds 5000/7000. |
+| `m 02:…` | Device ID derived from this Mac's hardware UUID, never the built-in receiver's. |
+
+The macOS firewall asks whether `uxplay` may accept incoming connections after
+install and after each upgrade: choose Allow.
+
 ## Casks
 
 | Cask | Description |
@@ -58,3 +89,4 @@ so `brew upgrade` skips it unless `--greedy` is used.
 Cask definitions are derived from [Homebrew/homebrew-cask](https://github.com/Homebrew/homebrew-cask)
 and distributed under the BSD 2-Clause License. See [LICENSE](LICENSE).
 The applications installed by these casks are subject to their own licenses.
+UxPlay is GPL-3.0-or-later; the `uxplay` formula builds the unmodified upstream source.

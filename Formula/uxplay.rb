@@ -1,0 +1,82 @@
+class Uxplay < Formula
+  desc "AirPlay Unix mirroring and audio server"
+  homepage "https://github.com/FDH2/UxPlay"
+  url "https://github.com/FDH2/UxPlay/archive/refs/tags/v1.73.7.tar.gz"
+  sha256 "65feb8732de666a7161a9e562aa603a7f5fe0ebb890c2a30c5e1a9c85c76309f"
+  license "GPL-3.0-or-later"
+  head "https://github.com/FDH2/UxPlay.git", branch: "master"
+
+  livecheck do
+    url :stable
+    strategy :github_latest
+  end
+
+  depends_on "cmake" => :build
+  depends_on "libplist" => :build # linked statically on macOS
+  depends_on "openssl@3" => :build # libcrypto linked statically on macOS
+  depends_on "pkgconf" => :build
+  depends_on "gettext"
+  depends_on "glib"
+  depends_on "gstreamer"
+  depends_on :macos
+
+  def install
+    system "cmake", "-S", ".", "-B", "build", *std_cmake_args
+    system "cmake", "--build", "build"
+    system "cmake", "--install", "build"
+    # Optional Bluetooth LE beacon helper: keep the script next to its non-executable module.
+    libexec.install bin/"uxplay-beacon.py", bin/"uxplay_beacon_module_BleuIO.py"
+
+    # Default startup options for `brew services`, kept in etc so upgrades never overwrite edits.
+    # Audio-only receiver: no video window, audio synced to the sender's video delay,
+    # fixed ports and a per-Mac device ID so it never collides with the built-in
+    # AirPlay Receiver (TCP 5000/7000, real MAC address).
+    (libexec/"uxplay-init-rc").write <<~SH
+      #!/bin/sh
+      set -e
+      name=$(scutil --get ComputerName)
+      uuid=$(ioreg -rd1 -c IOPlatformExpertDevice | sed -n 's/.*"IOPlatformUUID" = "\\(.*\\)"/\\1/p')
+      mac=02:$(printf %s "$uuid" | md5 | cut -c1-10 | sed 's/../&:/g; s/:$//')
+      cat > "#{etc}/uxplayrc" <<EOF
+      # UxPlay startup options for \\`brew services\\` (one per line, no leading "-").
+      # See \\`uxplay -h\\`. Apply changes with: brew services restart colah16/tap/uxplay
+      n "$name 오디오"
+      nh
+      vs 0
+      vsync no
+      async
+      p 7200
+      m $mac
+      EOF
+    SH
+    chmod 0755, libexec/"uxplay-init-rc"
+  end
+
+  post_install_steps do
+    unless_path_exists "uxplayrc", base: :etc do
+      run "uxplay-init-rc", base: :libexec, writable_paths: ["uxplayrc"], writable_base: :etc
+    end
+  end
+
+  def caveats
+    <<~EOS
+      `brew services` reads its options from:
+        #{etc}/uxplayrc
+      The macOS firewall asks once (and again after each upgrade) whether
+      uxplay may accept incoming connections: choose Allow.
+    EOS
+  end
+
+  service do
+    run [opt_bin/"uxplay", "-rc", etc/"uxplayrc"]
+    keep_alive true
+    log_path var/"log/uxplay.log"
+    error_log_path var/"log/uxplay.log"
+  end
+
+  test do
+    # Running uxplay at all needs the macOS GUI event loop (gst_macos_main), which the
+    # test sandbox blocks, so check the built binary instead of executing it.
+    assert_includes (bin/"uxplay").binread, version.to_s
+  end
+end
