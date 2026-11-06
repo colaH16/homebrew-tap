@@ -1,8 +1,8 @@
 cask "tile-launcher@dev" do
-  version "2.1.11,78"
-  sha256 "e980c490d87fff37e9451f49b526b98ecddcc4b7d7f798feae872948e82a6470"
+  version "2.1.11,79"
+  sha256 "d8c1c593ccb4c31aae420db044fb86d3584c0634d80a4d04ee84b2f21e8141f3"
 
-  url "https://raw.githubusercontent.com/colaH16/homebrew-tap/8e255517e9d4ecc3b175a4ced784dca24f71e644/tile-launcher/#{version.csv.first}-#{version.csv.second}/Tile-Launcher-#{version.csv.first}-arm64.zip"
+  url "https://raw.githubusercontent.com/colaH16/homebrew-tap/d800e048ff485bfc7c9c903a89673298cad55d0b/tile-launcher/#{version.csv.first}-#{version.csv.second}/Tile-Launcher-#{version.csv.first}-arm64.zip"
   name "Tile Launcher Dev"
   desc "Development test build of the Option-key tile overlay launcher"
   homepage "https://github.com/colaH16/tile-launcher"
