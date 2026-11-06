@@ -62,20 +62,22 @@ fork's [release](https://github.com/colaH16/UxPlay/releases/tag/v1.73.7-cola.1).
 
 ### tile-launcher@dev
 
-Developer ID signed and Apple notarized diagnostic trial 2.1.11 (81), distributed
+Developer ID signed and Apple notarized development trial 2.1.11 (82), distributed
 from this tap's dev-builds branch. Stable tile-launcher remains 2.1.10 (77).
-This build adds a separately opted-in bounded structural AX diagnostic probe
-for the remaining Help-search capture issue; it is not a new capture-policy fix.
+This build changes Help-search click capture during an ordinary launch.
+The improvement is ready for user testing; successful capture in Numbers and
+other apps still needs confirmation on the tested Mac.
 
 Existing dev installations keep their app directory and settings:
 
     brew update
     brew upgrade --cask colah16/tap/tile-launcher@dev
 
-Menu capture logging is off by default and requires a new app process with
---menu-capture-log. Structural reads require explicit --menu-capture-structure opt-in.
-See the [diagnostic test guide](https://github.com/colaH16/homebrew-tap/blob/cc0c780cc51d35e4ec3f8bcaa3548c83a67a1fc6/tile-launcher/2.1.11-81/diagnostic-guide.md) for the exact flag combination,
-normal quit, scoped probe limits and the local diagnostic file.
+Quit normally after updating, then start without diagnostic arguments and test
+the failed actionable Help-search result click once. Optional diagnostics remain
+off by default. If the failure persists, a new process with --menu-capture-log
+and --menu-capture-structure enables the bounded fallback diagnostic session.
+See the [test and diagnostic guide](https://github.com/colaH16/homebrew-tap/blob/194deb3ae4d7872a138022180f09fae3a93b1fbf/tile-launcher/2.1.11-82/diagnostic-guide.md) for exact steps and limits.
 
 Only one channel can be installed because both use the same app and settings.
 Switch without --zap to preserve settings; pass --appdir when installing if you
