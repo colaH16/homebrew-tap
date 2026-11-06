@@ -1,0 +1,82 @@
+{
+  "version": "2.2.0",
+  "build": "83",
+  "source_revision": "fc5edd63c328c968ad310c7e237ae28395e3cf2a",
+  "source_parent": "99b683e59dec43c2344b90a620bc23f6a94727e3",
+  "source_base": "17f3f61544a18f5e1675b3aadeb4a33848020b73",
+  "diagnostics": false,
+  "stable_eligible": true,
+  "production_publish_allowed": false,
+  "compile_environment": {
+    "TILE_LAUNCHER_MENU_CAPTURE_DIAGNOSTICS": "0"
+  },
+  "purpose": "menu-path-caption",
+  "validation_input_count": 235,
+  "validation_input_sha256": "91e8eeb2a461ee46e06d2445054dc50d7190bf2e949645079e2ce89364270561",
+  "validation_results": {
+    "on-tests": {
+      "exit": 0,
+      "expected": 0,
+      "seconds": 22.57
+    },
+    "on-role-and-deferred": {
+      "exit": 0,
+      "expected": 0,
+      "seconds": 0.393
+    },
+    "on-menu-logger": {
+      "exit": 0,
+      "expected": 0,
+      "seconds": 0.034
+    },
+    "on-menu-missing": {
+      "exit": 2,
+      "expected": 2,
+      "seconds": 0.027
+    },
+    "on-option": {
+      "exit": 0,
+      "expected": 0,
+      "seconds": 4.347
+    },
+    "on-caption": {
+      "exit": 0,
+      "expected": 0,
+      "seconds": 2.448
+    },
+    "off-tests": {
+      "exit": 0,
+      "expected": 0,
+      "seconds": 12.962
+    },
+    "off-deferred": {
+      "exit": 0,
+      "expected": 0,
+      "seconds": 0.385
+    },
+    "off-option": {
+      "exit": 0,
+      "expected": 0,
+      "seconds": 4.345
+    },
+    "off-caption": {
+      "exit": 0,
+      "expected": 0,
+      "seconds": 2.493
+    },
+    "python": {
+      "exit": 0,
+      "expected": 0,
+      "seconds": 0.142
+    },
+    "release-off": {
+      "exit": 0,
+      "expected": 0,
+      "seconds": 30.599
+    }
+  },
+  "native_ui": "actual renderer; 1x/1.4x/tight light/dark; visual review clear",
+  "claude_agreement": true,
+  "codex_independent_review": true,
+  "user_trial_pending": true
+}
