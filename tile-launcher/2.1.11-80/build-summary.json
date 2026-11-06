@@ -1,0 +1,35 @@
+{
+  "source_base": "17f3f61544a18f5e1675b3aadeb4a33848020b73",
+  "source_parent": "0f67b7d0d3139b52a74b6072e3c8a93d010df0f4",
+  "source_revision": "cac49e4999c2675a5e9277d5cd3ec8063ba53592",
+  "channel": "dev",
+  "diagnostics": true,
+  "stable_eligible": false,
+  "compile_environment": {
+    "TILE_LAUNCHER_MENU_CAPTURE_DIAGNOSTICS": "1"
+  },
+  "validated_inputs": 213,
+  "version": "2.1.11",
+  "build": "80",
+  "production_publish_allowed": false,
+  "binary_sha256": "3619a95b89b31891586c387d1323bff4dcf05f42ce185b7486deb3a4bbef9b67",
+  "pre_staple_bundle_sha256": "4c060f247520aa7fb26de3e8853b33f5119a5b7ddb606d1504b19c1d06fb4c38",
+  "final_bundle_sha256": "9852808b9f7c333863b4048f147091eb403cba0b168859ed022be58618c03edf",
+  "build_id": "c3750c75b1f6cb6e78f85fd7ec023fa24866d534c7eea335e51ce172d680f84d",
+  "signing": "notarized",
+  "cloud_profile_sha256": "de739b1356e80967dd55f28f29290c0f9d88d2b59551dffddb55bdd8d88e5939",
+  "submitted_archive_sha256": "2fdb3ec70e718a179d1b7c44d3c5012105e1f244ad0aae953232191cb747c99f",
+  "notary_id": "a9aff0e3-cd3a-425c-aed5-c500a8e916d6",
+  "notary_status": "Accepted",
+  "assets": {
+    "Tile-Launcher-2.1.11-arm64.zip": "850374a79e0e70ada11f04b159825094dbda3dddce1d2e90c2330da87e035d88",
+    "release-metadata.json": "774fc26cfb0bac22c456379e360c236ae640ec598024bd647946b0e115cce2b1",
+    "SHA256SUMS.txt": "939e4f00773017db483b7645a2d467ef3148ab566d6e370dc8696f401accfe56"
+  },
+  "existing_files_unchanged_after_staple": 9,
+  "added_ticket_files": [
+    "Contents/CodeResources"
+  ],
+  "minimum_macos": "26.0",
+  "architecture": "arm64"
+}

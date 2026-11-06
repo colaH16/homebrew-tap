@@ -1,0 +1,2 @@
+850374a79e0e70ada11f04b159825094dbda3dddce1d2e90c2330da87e035d88  Tile-Launcher-2.1.11-arm64.zip
+774fc26cfb0bac22c456379e360c236ae640ec598024bd647946b0e115cce2b1  release-metadata.json

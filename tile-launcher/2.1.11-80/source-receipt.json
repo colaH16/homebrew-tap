@@ -1,0 +1,12 @@
+{
+  "source_base": "17f3f61544a18f5e1675b3aadeb4a33848020b73",
+  "source_parent": "0f67b7d0d3139b52a74b6072e3c8a93d010df0f4",
+  "source_revision": "cac49e4999c2675a5e9277d5cd3ec8063ba53592",
+  "channel": "dev",
+  "diagnostics": true,
+  "stable_eligible": false,
+  "compile_environment": {
+    "TILE_LAUNCHER_MENU_CAPTURE_DIAGNOSTICS": "1"
+  },
+  "validated_inputs": 213
+}
