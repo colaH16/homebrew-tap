@@ -1,0 +1,19 @@
+{
+  "source_base": "17f3f61544a18f5e1675b3aadeb4a33848020b73",
+  "source_parent": "cac49e4999c2675a5e9277d5cd3ec8063ba53592",
+  "source_revision": "a2d5095b2d3adb200fae56ec00ea27039b941885",
+  "channel": "dev",
+  "diagnostics": true,
+  "stable_eligible": false,
+  "production_publish_allowed": false,
+  "compile_environment": {
+    "TILE_LAUNCHER_MENU_CAPTURE_DIAGNOSTICS": "1"
+  },
+  "validated_inputs": 231,
+  "version": "2.1.11",
+  "build": "81",
+  "structure_flags": [
+    "--menu-capture-log",
+    "--menu-capture-structure"
+  ]
+}
