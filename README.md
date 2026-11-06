@@ -62,11 +62,11 @@ fork's [release](https://github.com/colaH16/UxPlay/releases/tag/v1.73.7-cola.1).
 
 ### tile-launcher@dev
 
-Developer ID signed and Apple notarized trial 2.1.11 (79), distributed
+Developer ID signed and Apple notarized diagnostic trial 2.1.11 (80), distributed
 from this tap's dev-builds branch. Stable tile-launcher remains 2.1.10 (77).
-This build keeps the Option press cursor anchor and trials deferred capture of
-Help-search result clicks. The fix runs normally without enabling diagnostics;
-behavior across apps is awaiting user testing.
+This build preserves dev79 capture behavior and distinguishes the remaining
+Numbers child-menu read failure by stage, API error code and returned counts.
+Numbers capture remains under investigation.
 
 Existing dev installations keep their app directory and settings:
 
@@ -74,7 +74,7 @@ Existing dev installations keep their app directory and settings:
     brew upgrade --cask colah16/tap/tile-launcher@dev
 
 Menu capture logging is off by default and requires a new app process with
---menu-capture-log. See the [diagnostic test guide](https://github.com/colaH16/homebrew-tap/blob/d800e048ff485bfc7c9c903a89673298cad55d0b/tile-launcher/2.1.11-79/diagnostic-guide.md) for normal quit,
+--menu-capture-log. See the [diagnostic test guide](https://github.com/colaH16/homebrew-tap/blob/138065d014022989080d2e1d4ef4959129200e99/tile-launcher/2.1.11-80/diagnostic-guide.md) for normal quit,
 startup, functional comparisons and finding the bounded local log.
 The log contains no search terms, menu titles, document/window text or raw coordinates.
 
