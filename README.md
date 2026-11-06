@@ -62,22 +62,24 @@ fork's [release](https://github.com/colaH16/UxPlay/releases/tag/v1.73.7-cola.1).
 
 ### tile-launcher@dev
 
-Developer ID signed and Apple notarized development trial 2.1.11 (82), distributed
-from this tap's dev-builds branch. Stable tile-launcher remains 2.1.10 (77).
-This build changes Help-search click capture during an ordinary launch.
-The improvement is ready for user testing; successful capture in Numbers and
-other apps still needs confirmation on the tested Mac.
+Developer ID signed and Apple notarized production-candidate trial 2.2.0 (83),
+distributed from this tap's dev-builds branch. Stable tile-launcher remains
+2.1.10 (77). Normal-size icon, image, symbol and shortcut menu tiles display
+their known parent path above the title when labels are enabled. Long paths
+shorten; the tooltip reveals the complete known path. Other tile modes keep
+their existing presentation.
+This candidate also includes the two earlier 2.1.11 bug fixes. User testing
+is pending; engineering eligibility is not approval for a stable release.
 
 Existing dev installations keep their app directory and settings:
 
     brew update
     brew upgrade --cask colah16/tap/tile-launcher@dev
 
-Quit normally after updating, then start without diagnostic arguments and test
-the failed actionable Help-search result click once. Optional diagnostics remain
-off by default. If the failure persists, a new process with --menu-capture-log
-and --menu-capture-structure enables the bounded fallback diagnostic session.
-See the [test and diagnostic guide](https://github.com/colaH16/homebrew-tap/blob/194deb3ae4d7872a138022180f09fae3a93b1fbf/tile-launcher/2.1.11-82/diagnostic-guide.md) for exact steps and limits.
+Quit normally after updating, then start normally to test the UI. This build
+excludes the optional menu diagnostics. See the [UI trial guide](https://github.com/colaH16/homebrew-tap/blob/86bdacd7b362d22d57e776c1406f8c42190d2cd5/tile-launcher/2.2.0-83/test-guide.md).
+The next public GitHub release, after the trial, is v2.2.0 with separate 2.1.11
+bug-fix and 2.2.0 feature sections; no separate v2.1.11 release is planned.
 
 Only one channel can be installed because both use the same app and settings.
 Switch without --zap to preserve settings; pass --appdir when installing if you
