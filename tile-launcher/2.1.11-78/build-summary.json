@@ -1,0 +1,32 @@
+{
+  "source_base": "17f3f61544a18f5e1675b3aadeb4a33848020b73",
+  "source_revision": "08ca97d7a5ca4a6c4dcc3b537ed4374429753e29",
+  "channel": "dev",
+  "diagnostics": true,
+  "stable_eligible": false,
+  "compile_environment": {
+    "TILE_LAUNCHER_MENU_CAPTURE_DIAGNOSTICS": "1"
+  },
+  "version": "2.1.11",
+  "build": "78",
+  "production_publish_allowed": false,
+  "binary_sha256": "c9ff7f20b465af52780db4a7dddbe9466d4cb36240299b13b5d179fe39f92382",
+  "pre_staple_bundle_sha256": "a1f1312d72cddc0ece16fc75f27e7ba8e649dcfbda2abc91b0f64e141bb813b0",
+  "signing": "notarized",
+  "cloud_profile_sha256": "de739b1356e80967dd55f28f29290c0f9d88d2b59551dffddb55bdd8d88e5939",
+  "notary_id": "cc8ff881-6b39-4b43-97d3-d43bfa1d34a9",
+  "notary_status": "Accepted",
+  "build_id": "5658f71a896ad46ab5008fcefda730e0c38647e83e7419bbdc5d551780b5bd0c",
+  "final_bundle_sha256": "2c13dc45b365f8deb7707e4a6f899e6d8e9073cb4754a1476beac201d3309c99",
+  "assets": {
+    "Tile-Launcher-2.1.11-arm64.zip": "e980c490d87fff37e9451f49b526b98ecddcc4b7d7f798feae872948e82a6470",
+    "release-metadata.json": "9a83810a5df278dace2cd3bd65dd2d4ec9248eac949bc9751a8cc1eb29995153",
+    "SHA256SUMS.txt": "83840cde1da8ef0c3fc8bfe14b1e4e476738f9bdcc27cf98beaacf46dbd94bdb"
+  },
+  "existing_files_unchanged_after_staple": 9,
+  "added_ticket_files": [
+    "Contents/CodeResources"
+  ],
+  "minimum_macos": "26.0",
+  "architecture": "arm64"
+}
