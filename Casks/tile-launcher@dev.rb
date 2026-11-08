@@ -2,7 +2,8 @@ cask "tile-launcher@dev" do
   version "2.3.0,86"
   sha256 "4b4bc6d9a4d1315926845225d82c632282abc94328de62a02635d9965e28caeb"
 
-  url "https://api.github.com/repos/colaH16/tile-launcher/releases/assets/723436829",
+  # Immutable release asset; the query labels the declared version.
+  url "https://api.github.com/repos/colaH16/tile-launcher/releases/assets/723436829?version=#{version.csv.first}",
       header: ["Accept: application/octet-stream", "X-GitHub-Api-Version: 2022-11-28"]
   name "Tile Launcher Dev"
   desc "Development test build of the Option-key tile overlay launcher"
