@@ -1,0 +1,44 @@
+{
+  "version": "2.2.0",
+  "build": "84",
+  "source_revision": "cdf17e95a992decd4bc1a8f244a7874692ba3e21",
+  "source_parent": "fc5edd63c328c968ad310c7e237ae28395e3cf2a",
+  "source_base": "17f3f61544a18f5e1675b3aadeb4a33848020b73",
+  "channel": "dev",
+  "purpose": "focus-profile-diagnostics",
+  "profile_fix_applied": false,
+  "runtime_opt_in": true,
+  "diagnostics": true,
+  "profile_diagnostics": true,
+  "menu_diagnostics": false,
+  "stable_eligible": false,
+  "production_publish_allowed": false,
+  "compile_environment": {
+    "TILE_LAUNCHER_MENU_CAPTURE_DIAGNOSTICS": "0",
+    "TILE_LAUNCHER_PROFILE_DIAGNOSTICS": "1"
+  },
+  "validated_inputs": 319,
+  "validation": {
+    "status": "passed",
+    "source_unchanged": true,
+    "inputs": 319,
+    "steps": 25,
+    "receipt_sha256": "b5183b513f57f958642c912813979e9395e461b80e152623725af0ee6400daf2",
+    "source_manifest_sha256": "dc4d9dadafb623b102d8ed52a335d9fba0903b573b81fab1e8ea13978709170d"
+  },
+  "swift_tests": {
+    "profile-on-menu-off-swift-tests": 344,
+    "both-off-swift-tests": 344,
+    "both-on-swift-tests": 352
+  },
+  "python_tests": 30,
+  "native_profile_validation": true,
+  "independent_codex_review": true,
+  "claude_production_review": "agreed; subsequent event-label and fixture-only changes independently reviewed",
+  "user_company_reproduction_pending": true,
+  "validation_history": [
+    "First attempt: legacy build-script test inherited PROFILE flag; test now explicitly checks both flags.",
+    "Second attempt: pending=1 fixture assumed writer/task order; explicit writer drain added, product guard unchanged.",
+    "Final attempt: complete matrix passed with frozen inputs unchanged."
+  ]
+}

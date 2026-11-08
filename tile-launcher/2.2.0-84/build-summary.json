@@ -1,0 +1,64 @@
+{
+  "version": "2.2.0",
+  "build": "84",
+  "source_revision": "cdf17e95a992decd4bc1a8f244a7874692ba3e21",
+  "source_parent": "fc5edd63c328c968ad310c7e237ae28395e3cf2a",
+  "source_base": "17f3f61544a18f5e1675b3aadeb4a33848020b73",
+  "channel": "dev",
+  "purpose": "focus-profile-diagnostics",
+  "profile_fix_applied": false,
+  "runtime_opt_in": true,
+  "diagnostics": true,
+  "profile_diagnostics": true,
+  "menu_diagnostics": false,
+  "stable_eligible": false,
+  "production_publish_allowed": false,
+  "compile_environment": {
+    "TILE_LAUNCHER_MENU_CAPTURE_DIAGNOSTICS": "0",
+    "TILE_LAUNCHER_PROFILE_DIAGNOSTICS": "1"
+  },
+  "validated_inputs": 319,
+  "validation": {
+    "status": "passed",
+    "source_unchanged": true,
+    "inputs": 319,
+    "steps": 25,
+    "receipt_sha256": "b5183b513f57f958642c912813979e9395e461b80e152623725af0ee6400daf2",
+    "source_manifest_sha256": "dc4d9dadafb623b102d8ed52a335d9fba0903b573b81fab1e8ea13978709170d"
+  },
+  "swift_tests": {
+    "profile-on-menu-off-swift-tests": 344,
+    "both-off-swift-tests": 344,
+    "both-on-swift-tests": 352
+  },
+  "python_tests": 30,
+  "native_profile_validation": true,
+  "independent_codex_review": true,
+  "claude_production_review": "agreed; subsequent event-label and fixture-only changes independently reviewed",
+  "user_company_reproduction_pending": true,
+  "validation_history": [
+    "First attempt: legacy build-script test inherited PROFILE flag; test now explicitly checks both flags.",
+    "Second attempt: pending=1 fixture assumed writer/task order; explicit writer drain added, product guard unchanged.",
+    "Final attempt: complete matrix passed with frozen inputs unchanged."
+  ],
+  "binary_sha256": "75420b803a9f5b8b405d8a0eac2332d6dd73daf915ef11da085207d567d92c6c",
+  "build_id": "16702eca9b46e0cb9a65e7dc2562db60c0eda570bed3dc776a5f766dd09a5bc3",
+  "pre_staple_bundle_sha256": "595e2e28222384ae9325ddef99aa612f5432ef801b9095bfe9ccc4cf6f081f20",
+  "final_bundle_sha256": "412417340fe369b291ff9dfb96e9979a11eee17c606da793e3a78bb15f14c797",
+  "signing": "notarized",
+  "cloud_profile_sha256": "de739b1356e80967dd55f28f29290c0f9d88d2b59551dffddb55bdd8d88e5939",
+  "submitted_archive_sha256": "bca9b779fc5680eebc7b736040a317054c84c5f5346d40c24df8b8392d0a0b96",
+  "notary_id": "aa268ff8-b08c-4b05-a2f7-371489fb7799",
+  "notary_status": "Accepted",
+  "assets": {
+    "Tile-Launcher-2.2.0-arm64.zip": "6fdcb1a29ec9ffb4e0f3cabf316f5ba12c988234b62c31f662df3ab7f562b164",
+    "release-metadata.json": "c5fc7e5d63960ea8864e6204c59f5b252ce37303d6865c6ac67e9ead48d31093",
+    "SHA256SUMS.txt": "3033b5d810e6de269842378678c5753e10c55b669febdb77befe1261430b0503"
+  },
+  "existing_files_unchanged_after_staple": 9,
+  "added_ticket_files": [
+    "Contents/CodeResources"
+  ],
+  "minimum_macos": "26.0",
+  "architecture": "arm64"
+}
