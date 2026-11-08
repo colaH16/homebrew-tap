@@ -62,24 +62,28 @@ fork's [release](https://github.com/colaH16/UxPlay/releases/tag/v1.73.7-cola.1).
 
 ### tile-launcher@dev
 
-Developer ID signed and Apple notarized production-candidate trial 2.2.0 (83),
-distributed from this tap's dev-builds branch. Stable tile-launcher remains
-2.1.10 (77). Normal-size icon, image, symbol and shortcut menu tiles display
-their known parent path above the title when labels are enabled. Long paths
-shorten; the tooltip reveals the complete known path. Other tile modes keep
-their existing presentation.
-This candidate also includes the two earlier 2.1.11 bug fixes. User testing
-is pending; engineering eligibility is not approval for a stable release.
+Developer ID signed and Apple notarized Focus-profile diagnostic trial 2.2.0
+(84), distributed from this tap's dev-builds branch. Stable tile-launcher
+remains 2.1.10 (77). This build helps distinguish the company Mac's Focus-filter
+profile mismatch; it does not claim that mismatch is fixed.
 
 Existing dev installations keep their app directory and settings:
 
     brew update
     brew upgrade --cask colah16/tap/tile-launcher@dev
 
-Quit normally after updating, then start normally to test the UI. This build
-excludes the optional menu diagnostics. See the [UI trial guide](https://github.com/colaH16/homebrew-tap/blob/86bdacd7b362d22d57e776c1406f8c42190d2cd5/tile-launcher/2.2.0-83/test-guide.md).
-The next public GitHub release, after the trial, is v2.2.0 with separate 2.1.11
-bug-fix and 2.2.0 feature sections; no separate v2.1.11 release is planned.
+Quit normally after updating and start the new 84 app normally. Right-click its
+menu-bar icon and choose the profile diagnostic start item, reproduce the
+Focus change and ordinary Option opening, then stop diagnostics and open the
+log folder. No diagnostic command-line arguments are required. See the
+[profile diagnostic trial guide](https://github.com/colaH16/homebrew-tap/blob/9276cebe0dd40e969686927f26c03e2216090cc8/tile-launcher/2.2.0-84/test-guide.md) for the exact menu labels.
+
+Recording is off by default. The trial includes only separately enabled,
+bounded local profile diagnostics, never menu capture diagnostics. There is
+no automatic upload. This diagnostic-included build is not eligible for
+stable publication. The earlier menu-path UI and 2.1.11 fixes remain included.
+The future public release remains v2.2.0 with separate 2.1.11 two-bug-fix and
+2.2.0 feature sections; no v2.1.11 release is created here.
 
 Only one channel can be installed because both use the same app and settings.
 Switch without --zap to preserve settings; pass --appdir when installing if you
