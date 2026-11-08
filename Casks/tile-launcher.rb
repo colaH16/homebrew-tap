@@ -1,14 +1,15 @@
 cask "tile-launcher" do
-  version "2.1.10"
-  sha256 "47e1f9c092e3760a5ecf24d9c4a1d6156046c76700bf12a2fb72379ac6c75f30"
+  version "2.3.0"
+  sha256 "4b4bc6d9a4d1315926845225d82c632282abc94328de62a02635d9965e28caeb"
 
-  url "https://github.com/colaH16/tile-launcher/releases/download/v#{version}/Tile-Launcher-#{version}-arm64.zip"
+  url "https://api.github.com/repos/colaH16/tile-launcher/releases/assets/723436829",
+      header: ["Accept: application/octet-stream", "X-GitHub-Api-Version: 2022-11-28"]
   name "Tile Launcher"
   desc "Option-key tile overlay for switching windows, launching apps and running menus"
   homepage "https://github.com/colaH16/tile-launcher"
 
   livecheck do
-    url :url
+    url "https://github.com/colaH16/tile-launcher"
     strategy :github_latest
   end
 

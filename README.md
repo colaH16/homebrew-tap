@@ -57,36 +57,23 @@ fork's [release](https://github.com/colaH16/UxPlay/releases/tag/v1.73.7-cola.1).
 |---|---|
 | `lowtide` | [LowTide](https://github.com/colaH16/LowTide) — Quits chosen apps (Google Drive, OneDrive, …) on Low Data Mode, hotspots or battery. Notarized release from GitHub. Apple Silicon, macOS 13+. |
 | `tile-launcher` | [Tile Launcher](https://github.com/colaH16/tile-launcher) — Option-key tile overlay launcher. Notarized release from GitHub. Apple Silicon, macOS 26+. |
-| `tile-launcher@dev` | Tile Launcher development test channel. Developer ID signed and Apple notarized diagnostic trial. Shares stable settings. |
+| `tile-launcher@dev` | Tile Launcher dev channel, currently the same notarized 2.3.0 (86) release as stable. Shares settings. |
 | `xld` | X Lossless Decoder. Kept here because `homebrew/cask` disabled it on 2026-09-01 (`:fails_gatekeeper_check`). |
 
 ### tile-launcher@dev
 
-Developer ID signed and Apple notarized default-profile/settings UI trial 2.3.0
-(85). Stable tile-launcher remains 2.1.10 (77). This build separates the saved
-default from manual selection and adds profile naming dialogs. The company
-Mac's R389 Focus mismatch is not yet confirmed resolved.
-
-Quit Tile Launcher normally, update, and start the new app normally:
+This channel now points to the same Developer ID signed and Apple notarized
+2.3.0 (86) GitHub release ZIP as stable tile-launcher, delivered by the public
+release-asset API without login while the canonical download route returns 504.
+Menu/profile diagnostic
+features are excluded. Company dev users can keep this channel installed:
 
     brew update
     brew upgrade --cask colah16/tap/tile-launcher@dev
 
-Existing dev installations keep their app directory and settings. See the
-[company UI trial guide](https://github.com/colaH16/homebrew-tap/blob/56e1fe858399b22d1d677c1acc34afb5602f3971/tile-launcher/2.3.0-85/test-guide.md) for Save/Cancel, default-role and profile
-creation checks. If the issue persists, the right-click menu offers optional
-bounded local profile diagnostics, off by default, with no automatic upload.
-No diagnostic command-line arguments are needed. This diagnostic-included
-trial is not eligible for stable publication.
-
-The future public release is v2.3.0 with separate 2.1.11 bug-fix, 2.2.0 menu-path
-and 2.3.0 profile/settings sections. No GitHub release or app main push is
-performed for this company trial.
-
-Only one channel can be installed because both use the same app and settings.
-Switch without --zap to preserve settings; pass --appdir when installing if you
-use a custom app directory. You may keep the dev channel installed when a
-tested build becomes stable; completed notarized builds are also delivered here.
+Quit normally before updating and reopen the app afterward. Existing appdir and
+settings are preserved. Both channels share the same app/settings; switch only
+if desired, without --zap. Historical dev-builds assets remain unchanged.
 
 ### xld
 

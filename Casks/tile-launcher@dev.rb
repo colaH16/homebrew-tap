@@ -1,8 +1,9 @@
 cask "tile-launcher@dev" do
-  version "2.3.0,85"
-  sha256 "fefe82572a9d0ed1e7d86628273e682fb12311dfeee3638e252abe18d2134b97"
+  version "2.3.0,86"
+  sha256 "4b4bc6d9a4d1315926845225d82c632282abc94328de62a02635d9965e28caeb"
 
-  url "https://raw.githubusercontent.com/colaH16/homebrew-tap/56e1fe858399b22d1d677c1acc34afb5602f3971/tile-launcher/#{version.csv.first}-#{version.csv.second}/Tile-Launcher-#{version.csv.first}-arm64.zip"
+  url "https://api.github.com/repos/colaH16/tile-launcher/releases/assets/723436829",
+      header: ["Accept: application/octet-stream", "X-GitHub-Api-Version: 2022-11-28"]
   name "Tile Launcher Dev"
   desc "Development test build of the Option-key tile overlay launcher"
   homepage "https://github.com/colaH16/tile-launcher"
@@ -21,10 +22,8 @@ cask "tile-launcher@dev" do
 
   # Shares the stable app's settings; intentionally no zap stanza.
   caveats <<~EOS
-    Developer ID signed and Apple notarized default-profile/settings UI trial.
-    Start normally to test saved defaults and profile creation/duplication UI.
-    Optional profile diagnostics are off by default in the right-click menu.
-    Company test build only; not eligible for stable publication.
+    Same Developer ID signed and Apple notarized 2.3.0 (86) build as stable.
+    Profile and menu diagnostic features are excluded from this public build.
     Shares settings and the app location with tile-launcher.
     Switch channels with brew uninstall, without --zap.
   EOS
