@@ -1,0 +1,17 @@
+{
+  "version": "2.3.1",
+  "build": "87",
+  "channel": "dev",
+  "source_revision": "9b2f4f5274b7f16dc6dc0aef5c6b9b704f3a2da0",
+  "purpose": "option-hold-and-pinned-run-close-rules (TODO-001~003)",
+  "diagnostics": false,
+  "profile_diagnostics": false,
+  "menu_diagnostics": false,
+  "compile_environment": {
+    "TILE_LAUNCHER_MENU_CAPTURE_DIAGNOSTICS": "0",
+    "TILE_LAUNCHER_PROFILE_DIAGNOSTICS": "0"
+  },
+  "stable_eligible": true,
+  "production_publish_allowed": false,
+  "source_public": "https://github.com/colaH16/tile-launcher/tree/main (source revision is on public main; no bundle/patch needed)"
+}
