@@ -1,10 +1,8 @@
 cask "tile-launcher@dev" do
-  version "2.3.0,86"
-  sha256 "4b4bc6d9a4d1315926845225d82c632282abc94328de62a02635d9965e28caeb"
+  version "2.3.1,87"
+  sha256 "44422ce67be79dfc213eb9e6a444c067c2e6e622cc4e9702ab1735a98d217378"
 
-  # Immutable release asset; the query labels the declared version.
-  url "https://api.github.com/repos/colaH16/tile-launcher/releases/assets/723436829?version=#{version.csv.first}",
-      header: ["Accept: application/octet-stream", "X-GitHub-Api-Version: 2022-11-28"]
+  url "https://raw.githubusercontent.com/colaH16/homebrew-tap/b19a0a33ad73634c92828516361bba6137e851f3/tile-launcher/#{version.csv.first}-#{version.csv.second}/Tile-Launcher-#{version.csv.first}-arm64.zip"
   name "Tile Launcher Dev"
   desc "Development test build of the Option-key tile overlay launcher"
   homepage "https://github.com/colaH16/tile-launcher"
@@ -23,8 +21,9 @@ cask "tile-launcher@dev" do
 
   # Shares the stable app's settings; intentionally no zap stanza.
   caveats <<~EOS
-    Same Developer ID signed and Apple notarized 2.3.0 (86) build as stable.
-    Profile and menu diagnostic features are excluded from this public build.
+    Developer ID signed and Apple notarized 2.3.1 (87) test build.
+    Option+number runs immediately; a pinned overlay closes after a run.
+    Stable stays on 2.3.0 until user testing passes.
     Shares settings and the app location with tile-launcher.
     Switch channels with brew uninstall, without --zap.
   EOS
